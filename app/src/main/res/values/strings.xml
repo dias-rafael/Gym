@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Gym</string>
+    <string name="retry">Retry</string>
+    <string name="gym_error">An error occurred while loading the gyms</string>
+    <string name="title_gym">Nome da Academia</string>
+    <string name="title_address">Nome da Cidade</string>
+    <string name="button_activity">Ver atividades</string>
+    <string name="title_tipo">Tipo Quarto</string>
+    <string name="unknown_error">unknown_error</string>
+    <string name="loading">Carregando...</string>
+    <string name="title_activity_page">Atividades da Academia</string>
+    <string name="rating">5.0</string>
 </resources>
