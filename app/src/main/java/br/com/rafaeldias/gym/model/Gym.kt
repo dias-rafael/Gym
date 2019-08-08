@@ -12,4 +12,6 @@ data class Gym(
     val logo: String,
     val rating: Double,
     val title: String
-) : Parcelable
+) : Parcelable {
+    fun gymMajorRating() = arrayOf(this).sortedByDescending { it.rating }.first()
+}

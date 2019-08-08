@@ -3,6 +3,7 @@ package br.com.rafaeldias.gym.ui
 import android.arch.lifecycle.MutableLiveData
 import br.com.rafaeldias.gym.base.BaseViewModel
 import br.com.rafaeldias.gym.model.Gym
+import br.com.rafaeldias.gym.utils.Format
 
 class GymViewModel: BaseViewModel() {
     private val gymTitle = MutableLiveData<String>()
@@ -11,10 +12,10 @@ class GymViewModel: BaseViewModel() {
     private val gymRating = MutableLiveData<String>()
 
     fun bind(gym: Gym){
-        gymTitle.value = gym.title
-        gymAddress.value = gym.address
-        gymLogo.value = gym.logo
-        gymRating.value = gym.rating.toString()
+        gymTitle.value = gym.gymMajorRating().title
+        gymAddress.value = gym.gymMajorRating().address
+        gymLogo.value = gym.gymMajorRating().logo
+        gymRating.value = Format.Rating(gym.gymMajorRating().rating)
     }
 
     fun getGymTitle(): MutableLiveData<String> {

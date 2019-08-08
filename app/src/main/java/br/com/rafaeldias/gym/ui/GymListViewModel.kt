@@ -36,7 +36,7 @@ class GymListViewModel: BaseViewModel(){
             .doOnSubscribe { onRetrieveGymListStart() }
             .doOnTerminate { onRetrieveGymListFinish() }
             .subscribe(
-                { result -> onRetrieveGymListSuccess(result)},
+                { result -> onRetrieveGymListSuccess(result.sortedByDescending { it.gymMajorRating().rating })},
                 { onRetrieveGymListError() }
             )
     }
