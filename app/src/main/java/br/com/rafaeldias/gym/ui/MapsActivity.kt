@@ -33,6 +33,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var locationListener: LocationListener
 
     private lateinit  var enderecoGym: String
+    private var latitudeGym: Double = 0.0
+    private var longitudeGym: Double = 0.0
+    private lateinit  var titleGym: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +49,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         enderecoGym = intent!!.getStringExtra("endereco")
+        latitudeGym = intent!!.getDoubleExtra("latitude",0.0)
+        longitudeGym = intent!!.getDoubleExtra("longitude", 0.0)
+        titleGym = intent!!.getStringExtra("title")
     }
 
     private fun initLocationListener() {
@@ -87,8 +93,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun addMarcador(latLng: LatLng, titulo: String) {
-        mMap.addMarker(MarkerOptions().position(latLng).title(titulo))
+    private fun addMarcador(latLng: LatLng, titulo: String, endereco: String) {
+        mMap.addMarker(MarkerOptions().position(latLng).title(titulo).snippet(endereco)).showInfoWindow()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -97,16 +103,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         initLocationListener()
         requestLocationUpdates()
 
-        val geocoder = Geocoder(applicationContext, Locale.getDefault())
-        val endereco = geocoder.getFromLocationName(enderecoGym,1)
-        val latitude = endereco[0].latitude
-        val longitude = endereco[0].longitude
-        addMarcador(LatLng(latitude,longitude), endereco[0].getAddressLine(0))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latitude,longitude),16f))
+        addMarcador(LatLng(latitudeGym,longitudeGym), titleGym, enderecoGym)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latitudeGym,longitudeGym),16f))
 
         val circulo = CircleOptions()
-        circulo.center(LatLng(latitude,longitude))
-        circulo.radius(200.0)
+        circulo.center(LatLng(latitudeGym,longitudeGym))
+        circulo.radius(100.0)
         circulo.fillColor(Color.argb(128,0,51,102))
         circulo.strokeWidth(10f)
         circulo.strokeColor(Color.argb(128,0,51,102))

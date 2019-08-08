@@ -37,9 +37,14 @@
 
         <activity
                 android:name=".ui.MapsActivity"
-                android:label="@string/title_activity_maps">
+                android:label="@string/title_activity_maps"
+                android:launchMode="singleTop">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.GymListActivity"/>
         </activity>
-        <activity android:name=".ui.GymListActivity">
+        <activity android:name=".ui.GymListActivity"
+                  android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

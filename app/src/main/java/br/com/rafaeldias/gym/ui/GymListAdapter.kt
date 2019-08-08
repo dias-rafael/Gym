@@ -38,10 +38,16 @@ class GymListAdapter: RecyclerView.Adapter<GymListAdapter.ViewHolder>() {
             binding.viewModel = viewModel
             binding.btListaGymMap.setOnClickListener(){
                 var endereco = binding.tvListaGymAddress.text.toString()
-                if (endereco != "" && endereco != null) {
+                var latitude = gym.location.latitude
+                var longitude = gym.location.longitude
+                var title = gym.title
+                if (endereco != "" && endereco != null && latitude != 0.0 && latitude != null && longitude != 0.0 && longitude != null && title != "" && title != null) {
                     val intent = Intent(binding.btListaGymMap.context, MapsActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     intent.putExtra("endereco", endereco)
+                    intent.putExtra("latitude", latitude)
+                    intent.putExtra("longitude", longitude)
+                    intent.putExtra("title", title)
                     binding.btListaGymMap.context.startActivity(intent)
                 }
             }
