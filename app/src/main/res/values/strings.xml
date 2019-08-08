@@ -12,4 +12,7 @@
     <string name="title_activity_page">Atividades da Academia</string>
     <string name="rating">5.00</string>
     <string name="image_rating">Rating</string>
+    <string name="google_maps_key" translatable="false">AIzaSyDOYugTRYYerlnsFtSEDV5vWJ_MWTTMmkI</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="sem_permissao_acesso_mapa">Acesso ao mapa negado!</string>
 </resources>

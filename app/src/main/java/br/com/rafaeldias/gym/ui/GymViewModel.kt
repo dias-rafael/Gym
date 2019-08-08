@@ -5,10 +5,11 @@ import br.com.rafaeldias.gym.base.BaseViewModel
 import br.com.rafaeldias.gym.model.Gym
 import br.com.rafaeldias.gym.utils.Format
 
+
 class GymViewModel: BaseViewModel() {
     private val gymTitle = MutableLiveData<String>()
     private val gymAddress = MutableLiveData<String>()
-    private val gymLogo = MutableLiveData<String>()
+    private var gymLogo = MutableLiveData<String>()
     private val gymRating = MutableLiveData<String>()
 
     fun bind(gym: Gym){

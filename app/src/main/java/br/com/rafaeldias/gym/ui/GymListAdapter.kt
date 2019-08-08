@@ -1,5 +1,6 @@
 package br.com.rafaeldias.gym.ui
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -35,11 +36,15 @@ class GymListAdapter: RecyclerView.Adapter<GymListAdapter.ViewHolder>() {
         fun bind(gym:Gym){
             viewModel.bind(gym)
             binding.viewModel = viewModel
-            //binding.btListaDetalhe.setOnClickListener{
-              //  val intent = Intent(binding.btListaDetalhe.context, DetailListActivity::class.java)
-                //intent.putExtra("detalhe_hotel", hotel)
-                //binding.btListaDetalhe.context.startActivity(intent)
-            //}
+            binding.btListaGymMap.setOnClickListener(){
+                var endereco = binding.tvListaGymAddress.text.toString()
+                if (endereco != "" && endereco != null) {
+                    val intent = Intent(binding.btListaGymMap.context, MapsActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    intent.putExtra("endereco", endereco)
+                    binding.btListaGymMap.context.startActivity(intent)
+                }
+            }
         }
 
     }

@@ -8,6 +8,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 import br.com.rafaeldias.gym.utils.extension.getParentActivity
+import android.widget.ImageView
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_gym.view.*
+
+
 
 @BindingAdapter("mutableVisibility")
 fun setMutableVisibility(view: View, visibility: MutableLiveData<Int>?) {
@@ -28,4 +33,14 @@ fun setMutableText(view: TextView, text: MutableLiveData<String>?) {
 @BindingAdapter("adapter")
 fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
     view.adapter = adapter
+}
+
+@BindingAdapter("imageUrl")
+fun loadImage(view: ImageView, imageUrl: String?) {
+    val parentActivity: AppCompatActivity? = view.getParentActivity()
+    if(parentActivity != null && imageUrl != null) {
+        Picasso.get()
+            .load(imageUrl)
+            .into(view.iVListaGymLogo)
+    }
 }
