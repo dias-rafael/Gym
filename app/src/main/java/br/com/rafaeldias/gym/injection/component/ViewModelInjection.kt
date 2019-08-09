@@ -1,6 +1,7 @@
 package br.com.rafaeldias.gym.injection.component
 
 import br.com.rafaeldias.gym.injection.module.NetworkModule
+import br.com.rafaeldias.gym.ui.DetailListViewModel
 import br.com.rafaeldias.gym.ui.GymListViewModel
 import dagger.Component
 import javax.inject.Singleton
@@ -11,7 +12,7 @@ interface ViewModelInjector {
 
     fun inject(gymListViewModel: GymListViewModel)
 
-    //fun injectDetail(activityListViewModel: ActivityListViewModel)
+    fun injectDetail(detailListViewModel: DetailListViewModel)
 
     @Component.Builder
     interface Builder {

@@ -36,7 +36,7 @@ class GymListAdapter: RecyclerView.Adapter<GymListAdapter.ViewHolder>() {
         fun bind(gym:Gym){
             viewModel.bind(gym)
             binding.viewModel = viewModel
-            binding.btListaGymMap.setOnClickListener(){
+            binding.btListaGymMap.setOnClickListener{
                 var endereco = binding.tvListaGymAddress.text.toString()
                 var latitude = gym.location.latitude
                 var longitude = gym.location.longitude
@@ -50,6 +50,11 @@ class GymListAdapter: RecyclerView.Adapter<GymListAdapter.ViewHolder>() {
                     intent.putExtra("title", title)
                     binding.btListaGymMap.context.startActivity(intent)
                 }
+            }
+            binding.btListaGymActivity.setOnClickListener{
+                val intent = Intent(binding.btListaGymActivity.context, DetailListActivity::class.java)
+                intent.putExtra("detalhe_gym", gym)
+                binding.btListaGymActivity.context.startActivity(intent)
             }
         }
 
