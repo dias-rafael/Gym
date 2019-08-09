@@ -21,12 +21,11 @@
                 app:mutableText="@{viewModelDetail.getDetalheModalidade()}"
                 android:textColor="@color/colorLightPrimary"
                 android:textSize="@dimen/subtitle_font_size"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:textStyle="bold" android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/btCheckIn" app:layout_constraintTop_toTopOf="@+id/btCheckIn"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="@+id/btCheckIn"
+                android:layout_marginTop="8dp"/>
 
         <View
                 android:layout_width="0dp"
@@ -38,7 +37,16 @@
                 android:layout_marginStart="16dp"
                 android:background="@color/colorSecondaryText"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/tvListaDetalheModalidade"/>
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/btCheckIn"
+        />
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:id="@+id/btCheckIn"
+                android:textSize="@dimen/button_font_size" android:text="@string/button_checkin"
+                android:background="@color/colorAccent" android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="24dp" android:layout_marginTop="8dp"/>
 
     </android.support.constraint.ConstraintLayout>
 

@@ -20,7 +20,6 @@ class DetailListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_detail_list)
 
         detalhe_gym = intent!!.getParcelableExtra<Gym>("detalhe_gym")
 
