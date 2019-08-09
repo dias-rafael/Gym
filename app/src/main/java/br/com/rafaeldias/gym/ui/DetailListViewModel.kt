@@ -8,7 +8,7 @@ class DetailListViewModel: BaseViewModel(){
     val detailListAdapter: DetailListAdapter = DetailListAdapter()
 
     fun setGym(detalhes: Gym? = null) {
-        detailListAdapter.updateDetailList(detalhes!!.activities)
+        detailListAdapter.updateDetailList(detalhes!!, detalhes!!.activities)
     }
 
 }

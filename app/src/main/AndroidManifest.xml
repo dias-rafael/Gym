@@ -21,12 +21,19 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.DetailListActivity"
-                  android:label="@string/title_activity_detail"
-                  android:launchMode="singleTop">
+        <activity android:name=".ui.CheckInActivity"
+                  android:label="@string/title_activity_checkin">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.GymListActivity"/>>
+                    android:value=".ui.DetailListActivity"/>
+        </activity>
+        <activity
+                android:name=".ui.DetailListActivity"
+                android:label="@string/title_activity_detail"
+                android:launchMode="singleTop">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.GymListActivity"/>
         </activity>
 
         <meta-data
