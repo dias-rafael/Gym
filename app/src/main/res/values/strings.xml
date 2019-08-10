@@ -2,6 +2,7 @@
     <string name="app_name">Gym</string>
     <string name="retry">Retry</string>
     <string name="gym_error">An error occurred while loading the gyms</string>
+    <string name="checkin_error">An error occurred attemping check-in</string>
     <string name="title_gym">Nome da Academia</string>
     <string name="title_address">Endereço da Academia</string>
     <string name="button_activity">Ver atividades</string>
