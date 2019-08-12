@@ -9,14 +9,19 @@ import br.com.rafaeldias.gym.model.Activity
 import br.com.rafaeldias.gym.model.CheckInRes
 import br.com.rafaeldias.gym.model.Gym
 import br.com.rafaeldias.gym.network.GymApi
+import br.com.rafaeldias.gym.utils.Format
 import kotlinx.android.synthetic.main.activity_check_in.*
 import javax.inject.Inject
 import org.json.JSONException
 import com.google.gson.JsonObject
-import org.json.JSONObject
 import retrofit2.Callback
 import retrofit2.Call
 import retrofit2.Response
+import java.lang.String.format
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime.from
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class CheckInActivity : AppCompatActivity(){
 
@@ -36,25 +41,23 @@ class CheckInActivity : AppCompatActivity(){
         var id_gym = gym!!.id
         var id_activity = activity!!.id
 
-        tvIdGym.setText(id_gym!!.toString())
-        tvIdActivity.setText(id_activity!!.toString())
-
         try {
 
             val paramObject = JsonObject()
             paramObject.addProperty("gymId", id_gym)
             paramObject.addProperty("activityId", id_activity)
 
-            tvRequest.setText(paramObject.toString())
-
             val checkIn = NetworkModule.provideGymApi(NetworkModule.provideRetrofitInterface()).checkIn(paramObject)
             checkIn.enqueue(object: Callback<CheckInRes>{
                 override fun onResponse(call: Call<CheckInRes>, response: Response<CheckInRes>) {
                     if (response.body() != null) {
                         if (response.body()!!.error == null) {
-                            tvResponse.setText(response.body()!!.checkinStatus.toString())
+                            tvGym.setText(response.body()!!.gym!!.title.toString())
+                            tvActivity.setText(response.body()!!.gym!!.activity!!.title.toString())
+                            tvData.setText(response.body()!!.checkinDate.toString())
+                            tvStatus.setText(response.body()!!.checkinStatus.toString())
                         } else {
-                            tvResponse.setText(response.body()!!.error.toString())
+                            tvStatus.setText(response.body()!!.error.toString())
                         }
                     } else {
                         Toast.makeText(this@CheckInActivity,R.string.checkin_error,Toast.LENGTH_LONG).show()

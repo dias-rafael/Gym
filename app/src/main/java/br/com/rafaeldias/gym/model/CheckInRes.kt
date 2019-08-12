@@ -17,4 +17,5 @@ class CheckInRes {
     @SerializedName("error")
     @Expose
     var error: String? = null
+
 }
