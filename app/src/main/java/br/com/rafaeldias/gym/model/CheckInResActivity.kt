@@ -1,8 +1,15 @@
 package br.com.rafaeldias.gym.model
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-data class CheckInResActivity(
-    @field: Json(name = "id") val id: Int,
-    @field: Json(name = "title") val title: String
-)
+class CheckInResActivity {
+
+    @SerializedName("id")
+    @Expose
+    var id: Int? = null
+    @SerializedName("title")
+    @Expose
+    var title: String? = null
+
+}

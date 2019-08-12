@@ -6,19 +6,19 @@ import android.widget.Toast
 import br.com.rafaeldias.gym.R
 import br.com.rafaeldias.gym.injection.module.NetworkModule
 import br.com.rafaeldias.gym.model.Activity
+import br.com.rafaeldias.gym.model.CheckInRes
 import br.com.rafaeldias.gym.model.Gym
 import br.com.rafaeldias.gym.network.GymApi
 import kotlinx.android.synthetic.main.activity_check_in.*
 import javax.inject.Inject
 import org.json.JSONException
+import com.google.gson.JsonObject
 import org.json.JSONObject
-import br.com.rafaeldias.gym.model.CheckInRes
-import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Call
 import retrofit2.Response
 
-
-class CheckInActivity : AppCompatActivity(), Callback<CheckInRes> {
+class CheckInActivity : AppCompatActivity(){
 
     private var gym: Gym? = null
     private var activity: Activity? = null
@@ -40,25 +40,37 @@ class CheckInActivity : AppCompatActivity(), Callback<CheckInRes> {
         tvIdActivity.setText(id_activity!!.toString())
 
         try {
-            val paramObject = JSONObject()
-            paramObject.put("gymId", id_gym)
-            paramObject.put("activityId", id_activity)
+
+            val paramObject = JsonObject()
+            paramObject.addProperty("gymId", id_gym)
+            paramObject.addProperty("activityId", id_activity)
 
             tvRequest.setText(paramObject.toString())
 
-            val checkIn = NetworkModule.provideGymApi(NetworkModule.provideRetrofitInterface()).checkIn(paramObject.toString())
-            checkIn.enqueue(this)
+            val checkIn = NetworkModule.provideGymApi(NetworkModule.provideRetrofitInterface()).checkIn(paramObject)
+            checkIn.enqueue(object: Callback<CheckInRes>{
+                override fun onResponse(call: Call<CheckInRes>, response: Response<CheckInRes>) {
+                    if (response.body() != null) {
+                        if (response.body()!!.error == null) {
+                            tvResponse.setText(response.body()!!.checkinStatus.toString())
+                        } else {
+                            tvResponse.setText(response.body()!!.error.toString())
+                        }
+                    } else {
+                        Toast.makeText(this@CheckInActivity,R.string.checkin_error,Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<CheckInRes>, t: Throwable) {
+                    Toast.makeText(this@CheckInActivity,R.string.checkin_error,Toast.LENGTH_LONG).show()
+                }
+            })
+
         } catch (e: JSONException) {
             Toast.makeText(this,R.string.checkin_error,Toast.LENGTH_LONG).show()
         }
+
     }
 
-    override fun onResponse(call: Call<CheckInRes>, response: Response<CheckInRes>) {
-        //Toast.makeText(this,response.toString(),Toast.LENGTH_LONG).show()
-        tvResponse.setText(response.toString())
-    }
 
-    override fun onFailure(call: Call<CheckInRes>, t: Throwable) {
-        Toast.makeText(this,R.string.checkin_error,Toast.LENGTH_LONG).show()
-    }
 }

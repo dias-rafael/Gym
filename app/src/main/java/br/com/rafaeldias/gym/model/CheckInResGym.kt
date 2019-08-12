@@ -1,9 +1,18 @@
 package br.com.rafaeldias.gym.model
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-data class CheckInResGym(
-    @field: Json(name = "Activity") val Activity: CheckInResActivity,
-    @field: Json(name = "id") val id: Int,
-    @field: Json(name = "title") val title: String
-)
+class CheckInResGym {
+
+    @SerializedName("id")
+    @Expose
+    var id: Int? = null
+    @SerializedName("title")
+    @Expose
+    var title: String? = null
+    @SerializedName("activity")
+    @Expose
+    var activity: CheckInResActivity? = null
+
+}
